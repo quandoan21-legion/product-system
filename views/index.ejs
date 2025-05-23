@@ -1,0 +1,40 @@
+<% layout('layout') -%>
+
+<h2>Product List</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Code</th><th>Name</th><th>Date</th><th>Price</th>
+            <th>Qty</th><th>Store</th><th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% products.forEach(p => { %>
+        <tr>
+            <td><%= p.ProductCode %></td>
+            <td><%= p.ProductName %></td>
+            <td><%= p.ProductDate.toLocaleDateString() %></td>
+            <td><%= p.ProductOriginPrice.toLocaleString() %></td>
+            <td><%= p.Quantity %></td>
+            <td><%= p.ProductStoreCode %></td>
+            <td>
+                <a href="/delete/<%= p._id %>" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<h3>Add New Product</h3>
+<form method="POST" action="/add">
+    <div class="row g-3">
+        <input class="form-control" name="ProductCode" placeholder="Code" required />
+        <input class="form-control" name="ProductName" placeholder="Name" required />
+        <input class="form-control" name="ProductDate" type="date" required />
+        <input class="form-control" name="ProductOriginPrice" type="number" placeholder="Price" required />
+        <input class="form-control" name="Quantity" type="number" placeholder="Quantity" required />
+        <input class="form-control" name="ProductStoreCode" placeholder="Store Code" required />
+        <button class="btn btn-primary mt-2">Add Product</button>
+    </div>
+</form>
+
